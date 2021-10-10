@@ -21,7 +21,7 @@ const addUser = ({ id, username, room }) => {
     // Validate username
     if (existingUser) {
         return {
-            error: "Username is already taken. Please select another one."
+            error: "Username is in use, please select another one."
         }
     }
 
@@ -31,6 +31,15 @@ const addUser = ({ id, username, room }) => {
     return { user }
 }
 
+
+// RemoveUser
+const removeUser = (id) => {
+    const index = users.findIndex((user) => user.id === id)
+
+        if (index !== -1) {
+            return users.splice(index, 1)[0]
+        }
+}
 
 // GetUser
 const getUser = (id) => {
@@ -43,18 +52,10 @@ const getUsersInRoom = (room) => {
     return users.filter((user) => user.room === room)
 }
 
-// RemoveUser
-const removeUser = (id) => {
-    const index = users.findIndex((user) => user.id === id)
-
-        if (index !== -1) {
-            return users.splice(index, 1)[0]
-        }
-}
 
 module.exports = {
     addUser,
     removeUser,
     getUser,
     getUsersInRoom
-}
+};
